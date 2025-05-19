@@ -26,7 +26,7 @@ export default function StudentRegistrationForm() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     fileInputRef.current?.click();
   };
@@ -61,7 +61,7 @@ export default function StudentRegistrationForm() {
 
       if (response.success) {
         toast.success(response.message);
-        router.push(`/profile-search/${formData.rollNumber}`)
+        router.push(`/profile-search/${formData.rollNumber}`);
       } else {
         toast.error(response.message);
       }
@@ -177,7 +177,10 @@ export default function StudentRegistrationForm() {
         <div className="flex items-center justify-between">
           <Button onClick={handleButtonClick}>File Input</Button>
           {!preview && (
-            <div className="h-[70px] w-[90px] border-3 border-dotted border-amber-600  rounded-lg flex items-center justify-center cursor-pointer hover:bg-black group">
+            <div
+              className="h-[70px] w-[90px] border-3 border-dotted border-amber-600  rounded-lg flex items-center justify-center cursor-pointer hover:bg-black group"
+              onClick={handleButtonClick}
+            >
               <CloudUpload
                 className="text-gray-600 group-hover:text-white"
                 size={30}
@@ -185,7 +188,7 @@ export default function StudentRegistrationForm() {
             </div>
           )}
           {preview && (
-            <div className="mt-2">
+            <div className="mt-2 cursor-pointer" onClick={handleButtonClick}>
               <Image
                 src={preview}
                 alt="Profile Picture"
