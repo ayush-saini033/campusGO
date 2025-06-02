@@ -151,31 +151,34 @@ export default function StudentRegistrationForm() {
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="rollNumber">Roll Number</Label>
-        <Input
-          id="rollNumber"
-          name="rollNumber"
-          placeholder="eg: 23bce0**"
-          value={formData.rollNumber}
-          className="placeholder:text-amber-500 font-bold"
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <div className="flex justify-between">
+        <div className="space-y-2">
+          <Label htmlFor="rollNumber">Roll Number</Label>
+          <Input
+            id="rollNumber"
+            name="rollNumber"
+            placeholder="eg: 23bce0**"
+            value={formData.rollNumber}
+            className="placeholder:text-amber-500 font-bold w-md"
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="profilePic">Profile Picture</Label>
-        <Input
-          type="file"
-          id="profilePic"
-          ref={fileInputRef}
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-        <div className="flex items-center justify-between">
-          <Button onClick={handleButtonClick}>File Input</Button>
+        <div className="flex flex-col items-center justify-between space-y-2">
+          <Input
+            type="file"
+            id="profilePic"
+            ref={fileInputRef}
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <Label htmlFor="profilePic" className="space-y-2">
+            Profile Picture
+          </Label>
+
+          {/* <Button onClick={handleButtonClick}>File Input</Button> */}
           {!preview && (
             <div
               className="h-[70px] w-[90px] border-3 border-dotted border-amber-600  rounded-lg flex items-center justify-center cursor-pointer hover:bg-black group"
@@ -188,7 +191,10 @@ export default function StudentRegistrationForm() {
             </div>
           )}
           {preview && (
-            <div className="mt-2 cursor-pointer" onClick={handleButtonClick}>
+            <div
+              className="cursor-pointer group relative"
+              onClick={handleButtonClick}
+            >
               <Image
                 src={preview}
                 alt="Profile Picture"
@@ -196,6 +202,7 @@ export default function StudentRegistrationForm() {
                 height={100}
                 className="rounded-lg border h-[70px] w-[90px]"
               />
+              <div className="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </div>
           )}
         </div>
